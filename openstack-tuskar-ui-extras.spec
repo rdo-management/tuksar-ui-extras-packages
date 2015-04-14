@@ -49,6 +49,12 @@ cp _60_tuskar_sat_ui.py.example %{buildroot}%{_sysconfdir}/openstack-dashboard/e
 ln -s %{_sysconfdir}/openstack-dashboard/enabled/_60_tuskar_boxes.py %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/_60_tuskar_boxes.py
 ln -s %{_sysconfdir}/openstack-dashboard/enabled/_60_tuskar_sat_ui.py %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/_60_tuskar_sat_ui.py
 
+# Move static files to horizon. These require that you compile them again
+# post install { python manage.py compress }
+# This might be possible to replace with "python %{buildroot}%{_datadir}/openstack-dashboard/manage.py collectstatic --noinput"
+mkdir -p  %{buildroot}%{_datadir}/openstack-dashboard/static/tuskar_boxes
+cp -r tuskar_boxes/static/tuskar_boxes/* %{buildroot}%{_datadir}/openstack-dashboard/static/tuskar_boxes/
+
 %files
 %doc README.rst ChangeLog
 %{!?_licensedir:%global license %%doc}
@@ -58,8 +64,12 @@ ln -s %{_sysconfdir}/openstack-dashboard/enabled/_60_tuskar_sat_ui.py %{buildroo
 %{_sysconfdir}/openstack-dashboard/enabled/_60_tuskar_sat_ui.py*
 %{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/_60_tuskar_boxes.py
 %{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/_60_tuskar_sat_ui.py
+%dir %{_datadir}/openstack-dashboard/static/tuskar_boxes
+%{_datadir}/openstack-dashboard/static/tuskar_boxes/*
 
-
+%post
+# Compress static files
+/usr/share/openstack-dashboard/manage.py compress --force
 
 %changelog
 * Mon Mar 16 2015 Jiri Tomasek <jtomasek@redhat.com> - 0.0.1-1
