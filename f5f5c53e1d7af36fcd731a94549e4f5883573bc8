@@ -1,0 +1,8 @@
+Code-Review+1: Ryan Brady <ryan@ryanbrady.org>
+Code-Review+2: Radomir Dopieralski <openstack@sheep.art.pl>
+Verified+1: Jiri Tomasek <jtomasek@redhat.com>
+Submitted-by: Jiri Tomasek <jtomasek@redhat.com>
+Submitted-at: Mon, 27 Apr 2015 15:30:40 +0200
+Reviewed-on: https://review.gerrithub.io/230729
+Project: rdo-management/tuskar-ui-extras-packaging
+Branch: refs/heads/packaging
