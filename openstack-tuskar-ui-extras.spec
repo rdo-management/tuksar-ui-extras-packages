@@ -48,6 +48,11 @@ mkdir -p %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/e
 cp _60_tuskar_boxes.py.example %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/_60_tuskar_boxes.py
 cp _60_tuskar_sat_ui.py.example %{buildroot}%{_datadir}/openstack-dashboard/openstack_dashboard/local/enabled/_60_tuskar_sat_ui.py
 
+# Delete tests
+rm -fr %{buildroot}%{python_sitelib}/tuskar_boxes/overview/tests.py*
+rm -fr %{buildroot}%{python_sitelib}/tuskar_boxes/static/tuskar_boxes/tests
+rm -fr %{buildroot}%{python_sitelib}/tuskar_sat_ui/nodes/tests.py*
+
 %files
 %doc README.rst ChangeLog
 %{!?_licensedir:%global license %%doc}
